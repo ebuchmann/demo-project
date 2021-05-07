@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start:server": "ts-node-dev --project ./server/tsconfig.json server/app.ts",
+    "start": "concurrently \"yarn start-client\" \"yarn start-server\"",
+    "start-client": "react-scripts start",
+    "start-server": "ts-node-dev --project ./server/tsconfig.json server/app.ts",
     "generate": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
@@ -14,7 +16,11 @@
     "@graphql-codegen/typescript-react-apollo": "2.2.4",
     "@graphql-codegen/typescript-resolvers": "1.19.1",
     "@types/config": "^0.0.38",
+    "@types/react": "^17.0.5",
+    "@types/react-dom": "^17.0.3",
+    "concurrently": "^6.0.2",
     "prettier": "^2.2.1",
+    "react-scripts": "^4.0.3",
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.4"
@@ -23,10 +29,26 @@
     "@apollo/client": "^3.3.16",
     "@graphql-tools/load-files": "^6.3.2",
     "@graphql-tools/merge": "^6.2.13",
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/lab": "^4.0.0-alpha.58",
     "apollo-datasource-rest": "^0.13.0",
     "apollo-server-express": "^2.24.0",
     "config": "^3.3.6",
     "express": "^4.17.1",
-    "graphql": "^15.5.0"
+    "graphql": "^15.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
