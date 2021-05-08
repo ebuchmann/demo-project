@@ -11,8 +11,8 @@ export default gql`
   }
 
   type Symbol {
-    symbol: ID
-    name: String
+    symbol: ID!
+    name: String!
     type: String
     region: String
     marketOpen: String

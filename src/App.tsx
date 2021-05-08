@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import SelectField from './SelectField';
+import SelectField from './components/SelectField';
+import SelectedItems from './components/SelectedItems';
 
-const App = () => <SelectField />;
+const App = () => (
+  <>
+    <SelectField />
+    <SelectedItems />
+  </>
+);
 
 export default App;

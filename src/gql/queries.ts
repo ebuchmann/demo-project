@@ -8,3 +8,17 @@ export const SearchSymbols = gql`
     }
   }
 `;
+
+export const GlobalQuote = gql`
+  query GlobalQuote($symbol: ID!) {
+    globalQuote(symbol: $symbol) {
+      symbol
+      open
+      high
+      low
+      price
+      change
+      changePercent
+    }
+  }
+`;

@@ -4,7 +4,7 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions = {};
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -16,9 +16,10 @@ export type Scalars = {
   Upload: any;
 };
 
+
 export enum CacheControlScope {
   Public = 'PUBLIC',
-  Private = 'PRIVATE',
+  Private = 'PRIVATE'
 }
 
 export type GlobalQuote = {
@@ -42,13 +43,16 @@ export type Query = {
   globalQuote?: Maybe<GlobalQuote>;
 };
 
+
 export type QuerySymbolArgs = {
   symbol: Scalars['ID'];
 };
 
+
 export type QuerySearchSymbolsArgs = {
   keywords: Scalars['String'];
 };
+
 
 export type QueryGlobalQuoteArgs = {
   symbol: Scalars['ID'];
@@ -56,8 +60,8 @@ export type QueryGlobalQuoteArgs = {
 
 export type Symbol = {
   __typename?: 'Symbol';
-  symbol?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
+  symbol: Scalars['ID'];
+  name: Scalars['String'];
   type?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
   marketOpen?: Maybe<Scalars['String']>;
@@ -131,22 +135,42 @@ export type SymbolDetail = {
   lastSplitDate?: Maybe<Scalars['String']>;
 };
 
+
 export type SearchSymbolsQueryVariables = Exact<{
   keywords: Scalars['String'];
 }>;
 
-export type SearchSymbolsQuery = { __typename?: 'Query' } & {
-  searchSymbols?: Maybe<Array<Maybe<{ __typename?: 'Symbol' } & Pick<Symbol, 'symbol' | 'name'>>>>;
-};
+
+export type SearchSymbolsQuery = (
+  { __typename?: 'Query' }
+  & { searchSymbols?: Maybe<Array<Maybe<(
+    { __typename?: 'Symbol' }
+    & Pick<Symbol, 'symbol' | 'name'>
+  )>>> }
+);
+
+export type GlobalQuoteQueryVariables = Exact<{
+  symbol: Scalars['ID'];
+}>;
+
+
+export type GlobalQuoteQuery = (
+  { __typename?: 'Query' }
+  & { globalQuote?: Maybe<(
+    { __typename?: 'GlobalQuote' }
+    & Pick<GlobalQuote, 'symbol' | 'open' | 'high' | 'low' | 'price' | 'change' | 'changePercent'>
+  )> }
+);
+
 
 export const SearchSymbolsDocument = gql`
-  query SearchSymbols($keywords: String!) {
-    searchSymbols(keywords: $keywords) {
-      symbol
-      name
-    }
+    query SearchSymbols($keywords: String!) {
+  searchSymbols(keywords: $keywords) {
+    symbol
+    name
   }
-`;
+}
+    `;
 
 /**
  * __useSearchSymbolsQuery__
@@ -164,27 +188,55 @@ export const SearchSymbolsDocument = gql`
  *   },
  * });
  */
-export function useSearchSymbolsQuery(
-  baseOptions: Apollo.QueryHookOptions<SearchSymbolsQuery, SearchSymbolsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SearchSymbolsQuery, SearchSymbolsQueryVariables>(
-    SearchSymbolsDocument,
-    options,
-  );
-}
-export function useSearchSymbolsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<SearchSymbolsQuery, SearchSymbolsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SearchSymbolsQuery, SearchSymbolsQueryVariables>(
-    SearchSymbolsDocument,
-    options,
-  );
-}
+export function useSearchSymbolsQuery(baseOptions: Apollo.QueryHookOptions<SearchSymbolsQuery, SearchSymbolsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchSymbolsQuery, SearchSymbolsQueryVariables>(SearchSymbolsDocument, options);
+      }
+export function useSearchSymbolsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchSymbolsQuery, SearchSymbolsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchSymbolsQuery, SearchSymbolsQueryVariables>(SearchSymbolsDocument, options);
+        }
 export type SearchSymbolsQueryHookResult = ReturnType<typeof useSearchSymbolsQuery>;
 export type SearchSymbolsLazyQueryHookResult = ReturnType<typeof useSearchSymbolsLazyQuery>;
-export type SearchSymbolsQueryResult = Apollo.QueryResult<
-  SearchSymbolsQuery,
-  SearchSymbolsQueryVariables
->;
+export type SearchSymbolsQueryResult = Apollo.QueryResult<SearchSymbolsQuery, SearchSymbolsQueryVariables>;
+export const GlobalQuoteDocument = gql`
+    query GlobalQuote($symbol: ID!) {
+  globalQuote(symbol: $symbol) {
+    symbol
+    open
+    high
+    low
+    price
+    change
+    changePercent
+  }
+}
+    `;
+
+/**
+ * __useGlobalQuoteQuery__
+ *
+ * To run a query within a React component, call `useGlobalQuoteQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGlobalQuoteQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGlobalQuoteQuery({
+ *   variables: {
+ *      symbol: // value for 'symbol'
+ *   },
+ * });
+ */
+export function useGlobalQuoteQuery(baseOptions: Apollo.QueryHookOptions<GlobalQuoteQuery, GlobalQuoteQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GlobalQuoteQuery, GlobalQuoteQueryVariables>(GlobalQuoteDocument, options);
+      }
+export function useGlobalQuoteLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GlobalQuoteQuery, GlobalQuoteQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GlobalQuoteQuery, GlobalQuoteQueryVariables>(GlobalQuoteDocument, options);
+        }
+export type GlobalQuoteQueryHookResult = ReturnType<typeof useGlobalQuoteQuery>;
+export type GlobalQuoteLazyQueryHookResult = ReturnType<typeof useGlobalQuoteLazyQuery>;
+export type GlobalQuoteQueryResult = Apollo.QueryResult<GlobalQuoteQuery, GlobalQuoteQueryVariables>;
