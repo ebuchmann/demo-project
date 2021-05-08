@@ -17,6 +17,7 @@ export type Scalars = {
 };
 
 
+
 export enum CacheControlScope {
   Public = 'PUBLIC',
   Private = 'PRIVATE'
@@ -159,6 +160,9 @@ export type GlobalQuoteQuery = (
   & { globalQuote?: Maybe<(
     { __typename?: 'GlobalQuote' }
     & Pick<GlobalQuote, 'symbol' | 'open' | 'high' | 'low' | 'price' | 'change' | 'changePercent'>
+  )>, symbol?: Maybe<(
+    { __typename?: 'SymbolDetail' }
+    & Pick<SymbolDetail, 'symbol' | 'EPS'>
   )> }
 );
 
@@ -271,6 +275,11 @@ export type CacheControlDirectiveArgs = {   maxAge?: Maybe<Scalars['Int']>;
   scope?: Maybe<CacheControlScope>; };
 
 export type CacheControlDirectiveResolver<Result, Parent, ContextType = GraphQLContext, Args = CacheControlDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type RateLimitDirectiveArgs = {   limit?: Scalars['Int'];
+  duration?: Scalars['Int']; };
+
+export type RateLimitDirectiveResolver<Result, Parent, ContextType = GraphQLContext, Args = RateLimitDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type GlobalQuoteResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['GlobalQuote'] = ResolversParentTypes['GlobalQuote']> = {
   symbol?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
@@ -389,6 +398,7 @@ export type Resolvers<ContextType = GraphQLContext> = {
 export type IResolvers<ContextType = GraphQLContext> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = GraphQLContext> = {
   cacheControl?: CacheControlDirectiveResolver<any, any, ContextType>;
+  rateLimit?: RateLimitDirectiveResolver<any, any, ContextType>;
 };
 
 

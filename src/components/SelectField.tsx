@@ -24,7 +24,6 @@ const SelectField: FC = () => {
   }, [handleSearch, debouncedValue]);
 
   const onChange = (_event, newValues) => {
-    console.log(newValues);
     if (newValues.length <= 3) setSelections(newValues);
   };
 
@@ -40,6 +39,7 @@ const SelectField: FC = () => {
       value={selections}
       onChange={onChange}
       getOptionLabel={(option) => option.name}
+      getOptionSelected={(option, value) => option.symbol === value.symbol}
       filterOptions={createFilterOptions({
         matchFrom: 'any',
         stringify: (option) => option.name + ' ' + option.symbol,

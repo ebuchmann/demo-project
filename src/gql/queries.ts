@@ -20,5 +20,9 @@ export const GlobalQuote = gql`
       change
       changePercent
     }
+    symbol(symbol: $symbol) {
+      symbol
+      EPS
+    }
   }
 `;

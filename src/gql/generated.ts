@@ -17,6 +17,7 @@ export type Scalars = {
 };
 
 
+
 export enum CacheControlScope {
   Public = 'PUBLIC',
   Private = 'PRIVATE'
@@ -159,6 +160,9 @@ export type GlobalQuoteQuery = (
   & { globalQuote?: Maybe<(
     { __typename?: 'GlobalQuote' }
     & Pick<GlobalQuote, 'symbol' | 'open' | 'high' | 'low' | 'price' | 'change' | 'changePercent'>
+  )>, symbol?: Maybe<(
+    { __typename?: 'SymbolDetail' }
+    & Pick<SymbolDetail, 'symbol' | 'EPS'>
   )> }
 );
 
@@ -209,6 +213,10 @@ export const GlobalQuoteDocument = gql`
     price
     change
     changePercent
+  }
+  symbol(symbol: $symbol) {
+    symbol
+    EPS
   }
 }
     `;

@@ -1,4 +1,5 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
+import Bottleneck from 'bottleneck';
 import {
   SymbolDetail,
   Symbol,
@@ -9,6 +10,11 @@ import { renameKeys, globalQuoteKeys, symbolKeys, symbolDetailKeys } from './uti
 import config from 'config';
 
 const apiKey = config.get<string>('server.apiKey');
+
+const limiter = new Bottleneck({
+  maxConcurrent: 1,
+  minTime: 1000,
+});
 
 interface SymbolResponseData {
   bestMatches: {
@@ -31,7 +37,9 @@ export class SymbolAPI extends RESTDataSource {
   }
 
   async getById(symbol: string): Promise<SymbolDetail> {
-    const data = await this.get(`?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`);
+    const data = await limiter.schedule(() =>
+      this.get(`?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`),
+    );
 
     const cleanedData = renameKeys(data, symbolDetailKeys);
 
@@ -39,8 +47,8 @@ export class SymbolAPI extends RESTDataSource {
   }
 
   async getAll({ keywords }: QuerySearchSymbolsArgs): Promise<Symbol[]> {
-    const data = await this.get<SymbolResponseData>(
-      `?function=SYMBOL_SEARCH&keywords=${keywords}&apikey=${apiKey}`,
+    const data = await limiter.schedule(() =>
+      this.get<SymbolResponseData>(`?function=SYMBOL_SEARCH&keywords=${keywords}&apikey=${apiKey}`),
     );
 
     const cleanedData = data.bestMatches.reduce((prev, curr) => {
@@ -52,8 +60,8 @@ export class SymbolAPI extends RESTDataSource {
   }
 
   async getGlobalQuote(symbol: string): Promise<GlobalQuote> {
-    const data = await this.get<SymbolResponseData>(
-      `?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`,
+    const data = await limiter.schedule(() =>
+      this.get<SymbolResponseData>(`?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`),
     );
 
     const cleanedData = renameKeys(data['Global Quote'], globalQuoteKeys);
