@@ -1,10 +1,35 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 import { useStore, shallow } from '../store';
-import client from '../gql/apollo-client';
+import { Doughnut } from 'react-chartjs-2';
+
+const backgroundColor = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'];
 
 const Chart = () => {
   const [chartEps] = useStore((state) => [state.chartEps], shallow);
-  return <div>{JSON.stringify(chartEps, null, 2)}</div>;
+  const data = chartEps.map(({ eps }) => eps);
+  const labels = chartEps.map(({ symbol }) => symbol);
+
+  if (labels.length === 0) return null;
+
+  return (
+    <>
+      <Typography variant="h6">EPS comparison</Typography>
+      <Doughnut
+        style={{ maxWidth: '400px', maxHeight: '400px' }}
+        type="doughnut"
+        data={{
+          datasets: [
+            {
+              data,
+              backgroundColor,
+            },
+          ],
+          labels,
+        }}
+      />
+    </>
+  );
 };
 
 export default Chart;

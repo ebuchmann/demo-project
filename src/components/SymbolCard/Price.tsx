@@ -20,8 +20,9 @@ const IconContainer = styled.div`
 `;
 
 const percentToFixed = (changePercent: string): string => {
-  const number = Number(changePercent.slice(0, changePercent.length - 1));
+  const number = Number(changePercent?.slice(0, changePercent.length - 1));
 
+  if (!number) return 'No change';
   return `${number.toFixed(2)}%`;
 };
 

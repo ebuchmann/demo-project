@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useLayoutEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { useGlobalQuoteQuery } from '../gql/generated';
 import styled from '@emotion/styled';
 import { useStore, shallow } from '../store';
@@ -8,9 +9,21 @@ import Stats from './SymbolCard/Stats';
 
 const Wrapper = styled.div`
   padding: 24px;
-  border: 1px solid black;
+  border: 1px solid grey;
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: 0.5fr 1fr 1fr;
+  background-color: white;
+  border-radius: 4px;
+`;
+
+const LoadingWrapper = styled.div`
+  border: 1px solid grey;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 4px;
 `;
 
 interface Props {
@@ -34,7 +47,12 @@ const SelectedItem: FC<Props> = ({ symbol, name, currency }) => {
     return () => removeEps(symbol);
   }, []);
 
-  if (loading) return null;
+  if (loading)
+    return (
+      <LoadingWrapper>
+        <CircularProgress />
+      </LoadingWrapper>
+    );
 
   if (error) {
     return (

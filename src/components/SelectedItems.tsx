@@ -8,6 +8,7 @@ const Grid = styled.div`
   grid-auto-flow: column;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 16px;
+  margin-bottom: 32px;
 `;
 
 const SelectedItems: FC = () => {

@@ -17,6 +17,12 @@ const Value = styled.div`
   margin-left: auto;
 `;
 
+const Missing = styled.div`
+  color: red;
+  font-size: 12px;
+  margin-top: 8px;
+`;
+
 interface StatsProps {
   high: number;
   low: number;
@@ -42,7 +48,7 @@ const Stats: FC<StatsProps> = ({ currency, high, low, missingEps }) => {
           <Currency currency={currency} value={low} />
         </Value>
       </StatContainer>
-      {missingEps && <p>No EPS available</p>}
+      {missingEps && <Missing>No EPS available</Missing>}
     </div>
   );
 };

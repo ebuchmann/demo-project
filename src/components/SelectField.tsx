@@ -56,7 +56,7 @@ const SelectField: FC = () => {
       value={selections}
       onChange={onChange}
       getOptionLabel={(option) => option.name}
-      style={{ maxWidth: '800px', marginBottom: '48px' }}
+      style={{ maxWidth: '800px', marginBottom: '48px', backgroundColor: 'white' }}
       getOptionSelected={(option, value) => option.symbol === value.symbol}
       filterOptions={createFilterOptions({
         matchFrom: 'any',
@@ -71,7 +71,7 @@ const SelectField: FC = () => {
             checked={selected}
           />
           {option.name}
-          <OptionSymbol>{option.symbol}</OptionSymbol> -- {option.currency}
+          <OptionSymbol>{option.symbol}</OptionSymbol>
         </OptionContainer>
       )}
       renderInput={(params) => (
