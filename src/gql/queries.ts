@@ -5,6 +5,7 @@ export const SearchSymbols = gql`
     searchSymbols(keywords: $keywords) {
       symbol
       name
+      currency
     }
   }
 `;

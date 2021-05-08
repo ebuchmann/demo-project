@@ -18,7 +18,7 @@ export default gql`
     marketOpen: String
     marketClose: String
     timezone: String
-    currency: String
+    currency: String!
     matchScore: String
   }
 
@@ -44,7 +44,7 @@ export default gql`
     bookValue: Float
     dividendPerShare: Float
     dividendYield: Float
-    EPS: Float
+    EPS: String
     revenuePerShareTTM: Float
     profitMargin: Float
     operatingMarginTTM: Float

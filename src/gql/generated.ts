@@ -17,7 +17,6 @@ export type Scalars = {
 };
 
 
-
 export enum CacheControlScope {
   Public = 'PUBLIC',
   Private = 'PRIVATE'
@@ -68,7 +67,7 @@ export type Symbol = {
   marketOpen?: Maybe<Scalars['String']>;
   marketClose?: Maybe<Scalars['String']>;
   timezone?: Maybe<Scalars['String']>;
-  currency?: Maybe<Scalars['String']>;
+  currency: Scalars['String'];
   matchScore?: Maybe<Scalars['String']>;
 };
 
@@ -95,7 +94,7 @@ export type SymbolDetail = {
   bookValue?: Maybe<Scalars['Float']>;
   dividendPerShare?: Maybe<Scalars['Float']>;
   dividendYield?: Maybe<Scalars['Float']>;
-  EPS?: Maybe<Scalars['Float']>;
+  EPS?: Maybe<Scalars['String']>;
   revenuePerShareTTM?: Maybe<Scalars['Float']>;
   profitMargin?: Maybe<Scalars['Float']>;
   operatingMarginTTM?: Maybe<Scalars['Float']>;
@@ -146,7 +145,7 @@ export type SearchSymbolsQuery = (
   { __typename?: 'Query' }
   & { searchSymbols?: Maybe<Array<Maybe<(
     { __typename?: 'Symbol' }
-    & Pick<Symbol, 'symbol' | 'name'>
+    & Pick<Symbol, 'symbol' | 'name' | 'currency'>
   )>>> }
 );
 
@@ -172,6 +171,7 @@ export const SearchSymbolsDocument = gql`
   searchSymbols(keywords: $keywords) {
     symbol
     name
+    currency
   }
 }
     `;

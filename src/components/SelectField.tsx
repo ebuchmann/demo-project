@@ -2,9 +2,26 @@ import React, { FC, useState, useEffect } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import styled from '@emotion/styled';
 import { useSearchSymbolsLazyQuery } from '../gql/generated';
 import { useDebounce } from '../hooks';
 import { useStore, shallow } from '../store';
+
+const OptionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
+const OptionSymbol = styled.div`
+  margin-left: auto;
+  font-weight: bold;
+`;
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const SelectField: FC = () => {
   const [opened, setOpened] = useState<boolean>(false);
@@ -39,15 +56,23 @@ const SelectField: FC = () => {
       value={selections}
       onChange={onChange}
       getOptionLabel={(option) => option.name}
+      style={{ maxWidth: '800px', marginBottom: '48px' }}
       getOptionSelected={(option, value) => option.symbol === value.symbol}
       filterOptions={createFilterOptions({
         matchFrom: 'any',
         stringify: (option) => option.name + ' ' + option.symbol,
       })}
-      renderOption={(option) => (
-        <React.Fragment>
-          <strong>{option.symbol}</strong> || {option.name}
-        </React.Fragment>
+      renderOption={(option, { selected }) => (
+        <OptionContainer>
+          <Checkbox
+            icon={icon}
+            checkedIcon={checkedIcon}
+            style={{ marginRight: 8 }}
+            checked={selected}
+          />
+          {option.name}
+          <OptionSymbol>{option.symbol}</OptionSymbol> -- {option.currency}
+        </OptionContainer>
       )}
       renderInput={(params) => (
         <TextField

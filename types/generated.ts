@@ -17,7 +17,6 @@ export type Scalars = {
 };
 
 
-
 export enum CacheControlScope {
   Public = 'PUBLIC',
   Private = 'PRIVATE'
@@ -68,7 +67,7 @@ export type Symbol = {
   marketOpen?: Maybe<Scalars['String']>;
   marketClose?: Maybe<Scalars['String']>;
   timezone?: Maybe<Scalars['String']>;
-  currency?: Maybe<Scalars['String']>;
+  currency: Scalars['String'];
   matchScore?: Maybe<Scalars['String']>;
 };
 
@@ -95,7 +94,7 @@ export type SymbolDetail = {
   bookValue?: Maybe<Scalars['Float']>;
   dividendPerShare?: Maybe<Scalars['Float']>;
   dividendYield?: Maybe<Scalars['Float']>;
-  EPS?: Maybe<Scalars['Float']>;
+  EPS?: Maybe<Scalars['String']>;
   revenuePerShareTTM?: Maybe<Scalars['Float']>;
   profitMargin?: Maybe<Scalars['Float']>;
   operatingMarginTTM?: Maybe<Scalars['Float']>;
@@ -146,7 +145,7 @@ export type SearchSymbolsQuery = (
   { __typename?: 'Query' }
   & { searchSymbols?: Maybe<Array<Maybe<(
     { __typename?: 'Symbol' }
-    & Pick<Symbol, 'symbol' | 'name'>
+    & Pick<Symbol, 'symbol' | 'name' | 'currency'>
   )>>> }
 );
 
@@ -276,11 +275,6 @@ export type CacheControlDirectiveArgs = {   maxAge?: Maybe<Scalars['Int']>;
 
 export type CacheControlDirectiveResolver<Result, Parent, ContextType = GraphQLContext, Args = CacheControlDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type RateLimitDirectiveArgs = {   limit?: Scalars['Int'];
-  duration?: Scalars['Int']; };
-
-export type RateLimitDirectiveResolver<Result, Parent, ContextType = GraphQLContext, Args = RateLimitDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
-
 export type GlobalQuoteResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['GlobalQuote'] = ResolversParentTypes['GlobalQuote']> = {
   symbol?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   open?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -309,7 +303,7 @@ export type SymbolResolvers<ContextType = GraphQLContext, ParentType extends Res
   marketOpen?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   marketClose?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   timezone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  currency?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  currency?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   matchScore?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -336,7 +330,7 @@ export type SymbolDetailResolvers<ContextType = GraphQLContext, ParentType exten
   bookValue?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   dividendPerShare?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   dividendYield?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  EPS?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  EPS?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   revenuePerShareTTM?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   profitMargin?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   operatingMarginTTM?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -398,7 +392,6 @@ export type Resolvers<ContextType = GraphQLContext> = {
 export type IResolvers<ContextType = GraphQLContext> = Resolvers<ContextType>;
 export type DirectiveResolvers<ContextType = GraphQLContext> = {
   cacheControl?: CacheControlDirectiveResolver<any, any, ContextType>;
-  rateLimit?: RateLimitDirectiveResolver<any, any, ContextType>;
 };
 
 

@@ -1,36 +1,38 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useLayoutEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { useGlobalQuoteQuery } from '../gql/generated';
 import styled from '@emotion/styled';
 import { useStore, shallow } from '../store';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import Price from './SymbolCard/Price';
+import Stats from './SymbolCard/Stats';
 
 const Wrapper = styled.div`
   padding: 24px;
   border: 1px solid black;
-`;
-
-const Change = styled.div<{ isPositive: boolean }>`
-  color: ${(props) => (props.isPositive ? 'green' : 'red')};
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
 `;
 
 interface Props {
   symbol: string;
   name: string;
+  currency: string;
 }
 
-const SelectedItem: FC<Props> = ({ symbol, name }) => {
+const SelectedItem: FC<Props> = ({ symbol, name, currency }) => {
   const { data, loading, error, refetch } = useGlobalQuoteQuery({ variables: { symbol } });
   const { change, changePercent, price, high, low } = data?.globalQuote || {};
   const { EPS } = data?.symbol || {};
-  const [addEps, chartEps] = useStore((state) => [state.addEps, state.chartEps], shallow);
+  const [addEps, removeEps] = useStore((state) => [state.addEps, state.removeEps], shallow);
+  const missingEps = EPS === 'None' || !EPS;
 
-  React.useEffect(() => {
-    addEps(symbol, EPS);
+  useEffect(() => {
+    if (!missingEps) addEps(symbol, Number(EPS));
   }, [addEps, EPS]);
 
-  React.useLayoutEffect(() => {}, []);
+  useLayoutEffect(() => {
+    return () => removeEps(symbol);
+  }, []);
 
   if (loading) return null;
 
@@ -43,19 +45,14 @@ const SelectedItem: FC<Props> = ({ symbol, name }) => {
     );
   }
 
-  const isPositive = change >= 0;
-
   return (
     <Wrapper>
-      <Typography variant="h4">{name}</Typography>
-      <Typography variant="body1" component="div">
-        {price} <Change isPositive={isPositive}>{changePercent}</Change>
-      </Typography>
-      {isPositive ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
-      <Typography variant="h5">Stats</Typography>
-      High: {high.toFixed(2)}
-      <br />
-      Low: {low.toFixed(2)}
+      <div>
+        <Typography variant="h5">{name}</Typography>
+        <Typography variant="body2">{symbol}</Typography>
+      </div>
+      <Price {...{ change, changePercent, price, currency }} />
+      <Stats {...{ high, low, missingEps, currency }} />
     </Wrapper>
   );
 };
