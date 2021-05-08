@@ -19,7 +19,7 @@ const IconContainer = styled.div`
   margin-right: 16px;
 `;
 
-const percentToFixed = (changePercent: string): string => {
+export const percentToFixed = (changePercent: string): string => {
   const number = Number(changePercent?.slice(0, changePercent.length - 1));
 
   if (!number) return 'No change';
@@ -40,14 +40,16 @@ const Price: FC<PriceProps> = ({ change, changePercent, currency, price }) => {
     <PriceContainer>
       <IconContainer>
         {isPositive ? (
-          <ArrowUpwardIcon fontSize="large" style={{ color: 'green' }} />
+          <ArrowUpwardIcon data-testid="arrow-up" fontSize="large" style={{ color: 'green' }} />
         ) : (
-          <ArrowDownwardIcon fontSize="large" style={{ color: 'red' }} />
+          <ArrowDownwardIcon data-testid="arrow-down" fontSize="large" style={{ color: 'red' }} />
         )}
       </IconContainer>
       <Typography variant="h6" component="div">
         <Currency currency={currency} value={price} />
-        <Change isPositive={isPositive}>{percentToFixed(changePercent)}</Change>
+        <Change data-testid="change" isPositive={isPositive}>
+          {percentToFixed(changePercent)}
+        </Change>
       </Typography>
     </PriceContainer>
   );
