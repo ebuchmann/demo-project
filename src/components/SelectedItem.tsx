@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useLayoutEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@material-ui/core/Button';
 import { useGlobalQuoteQuery } from '../gql/generated';
 import styled from '@emotion/styled';
 import { useStore, shallow } from '../store';
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
   padding: 24px;
   border: 1px solid grey;
   display: grid;
-  grid-template-rows: 0.5fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1.5fr;
   background-color: white;
   border-radius: 4px;
 `;
@@ -24,6 +25,7 @@ const LoadingWrapper = styled.div`
   justify-content: center;
   background-color: white;
   border-radius: 4px;
+  flex-direction: column;
 `;
 
 interface Props {
@@ -33,7 +35,10 @@ interface Props {
 }
 
 const SelectedItem: FC<Props> = ({ symbol, name, currency }) => {
-  const { data, loading, error, refetch } = useGlobalQuoteQuery({ variables: { symbol } });
+  const { data, loading, error, refetch } = useGlobalQuoteQuery({
+    variables: { symbol },
+    notifyOnNetworkStatusChange: true,
+  });
   const { change, changePercent, price, high, low } = data?.globalQuote || {};
   const { EPS } = data?.symbol || {};
   const [addEps, removeEps] = useStore((state) => [state.addEps, state.removeEps], shallow);
@@ -56,10 +61,17 @@ const SelectedItem: FC<Props> = ({ symbol, name, currency }) => {
 
   if (error) {
     return (
-      <p>
-        Oh crap! Here's a button to try that again{' '}
-        <button onClick={() => refetch()}>Click me</button>
-      </p>
+      <LoadingWrapper>
+        Something went wrong while trying to load data for {symbol}.
+        <Button
+          color="primary"
+          variant="outlined"
+          onClick={() => refetch()}
+          style={{ marginTop: '16px' }}
+        >
+          Try again
+        </Button>
+      </LoadingWrapper>
     );
   }
 
