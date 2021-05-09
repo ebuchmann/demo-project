@@ -55,4 +55,5 @@ const Price: FC<PriceProps> = ({ change, changePercent, currency, price }) => {
   );
 };
 
+Price.displayName = 'Price';
 export default Price;

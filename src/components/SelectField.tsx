@@ -87,4 +87,5 @@ const SelectField: FC = () => {
   );
 };
 
+SelectField.displayName = 'SelectField';
 export default SelectField;

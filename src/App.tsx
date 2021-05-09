@@ -29,4 +29,5 @@ const App: FC = () => (
   </OuterContainer>
 );
 
+App.displayName = 'App';
 export default App;

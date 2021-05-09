@@ -87,4 +87,5 @@ const SelectedItem: FC<Props> = ({ symbol, name, currency }) => {
   );
 };
 
+SelectedItem.displayName = 'SelectedItem';
 export default SelectedItem;
