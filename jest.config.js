@@ -16,4 +16,5 @@ module.exports = {
     '/config',
     'generated.ts',
   ],
+  testPathIgnorePatterns: ['/config'],
 };
