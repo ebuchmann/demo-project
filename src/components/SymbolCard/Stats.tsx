@@ -53,4 +53,5 @@ const Stats: FC<StatsProps> = ({ currency, high, low, missingEps }) => {
   );
 };
 
+Stats.displayName = 'Stats';
 export default Stats;

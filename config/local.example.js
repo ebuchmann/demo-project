@@ -1,6 +1,5 @@
 const config = {
-  apiKey: '',
-  port: 8080,
+  apiKey: 'YOURAPIKEYHERE',
 };
 
 module.exports = config;

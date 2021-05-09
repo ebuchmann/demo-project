@@ -9,7 +9,7 @@ import {
 import { renameKeys, globalQuoteKeys, symbolKeys, symbolDetailKeys } from './utils';
 import config from 'config';
 
-const apiKey = config.get<string>('server.apiKey');
+const apiKey = config.get<string>('apiKey');
 
 const limiter = new Bottleneck({
   maxConcurrent: 1,

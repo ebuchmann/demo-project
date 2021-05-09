@@ -2,7 +2,7 @@ import config from 'config';
 import { ApolloServer } from 'apollo-server';
 import { dataSources, typeDefs, resolvers } from './gql';
 
-const port = config.get<number>('server.port');
+const port = config.get<number>('port');
 
 const server = new ApolloServer({
   dataSources,
