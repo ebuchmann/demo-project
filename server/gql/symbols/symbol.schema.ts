@@ -90,11 +90,11 @@ export default gql`
     open: Float
     high: Float
     low: Float
-    price: Float
+    price: Float!
     volume: Int
     latestTradingDay: String
     previousClose: Float
-    change: Float
-    changePercent: String
+    change: Float!
+    changePercent: String!
   }
 `;

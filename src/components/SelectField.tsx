@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, ChangeEvent } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
@@ -7,7 +7,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import styled from '@emotion/styled';
 import { useSearchSymbolsLazyQuery } from '../gql/generated';
 import { useDebounce } from '../hooks';
-import { useStore, shallow } from '../store';
+import { useStore, shallow, Selections } from '../store';
 
 const OptionContainer = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ const SelectField: FC = () => {
     shallow,
   );
   const [handleSearch, { data, loading }] = useSearchSymbolsLazyQuery();
-  const options = data?.searchSymbols || [];
+  const options = data?.searchSymbols || ([] as Selections[]);
   const debouncedValue = useDebounce(value, 500);
 
   useEffect(() => {
@@ -40,12 +40,12 @@ const SelectField: FC = () => {
     }
   }, [handleSearch, debouncedValue]);
 
-  const onChange = (_event, newValues) => {
+  const onChange = (_event: ChangeEvent<{}>, newValues: Selections[]) => {
     if (newValues.length <= 3) setSelections(newValues);
   };
 
   return (
-    <Autocomplete
+    <Autocomplete<Selections, true>
       multiple
       loading={loading}
       disableCloseOnSelect={true}

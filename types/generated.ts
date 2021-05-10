@@ -28,12 +28,12 @@ export type GlobalQuote = {
   open?: Maybe<Scalars['Float']>;
   high?: Maybe<Scalars['Float']>;
   low?: Maybe<Scalars['Float']>;
-  price?: Maybe<Scalars['Float']>;
+  price: Scalars['Float'];
   volume?: Maybe<Scalars['Int']>;
   latestTradingDay?: Maybe<Scalars['String']>;
   previousClose?: Maybe<Scalars['Float']>;
-  change?: Maybe<Scalars['Float']>;
-  changePercent?: Maybe<Scalars['String']>;
+  change: Scalars['Float'];
+  changePercent: Scalars['String'];
 };
 
 export type Query = {
@@ -280,12 +280,12 @@ export type GlobalQuoteResolvers<ContextType = GraphQLContext, ParentType extend
   open?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   high?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   low?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   volume?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   latestTradingDay?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   previousClose?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  changePercent?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  change?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  changePercent?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

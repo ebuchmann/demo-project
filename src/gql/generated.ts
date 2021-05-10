@@ -28,12 +28,12 @@ export type GlobalQuote = {
   open?: Maybe<Scalars['Float']>;
   high?: Maybe<Scalars['Float']>;
   low?: Maybe<Scalars['Float']>;
-  price?: Maybe<Scalars['Float']>;
+  price: Scalars['Float'];
   volume?: Maybe<Scalars['Int']>;
   latestTradingDay?: Maybe<Scalars['String']>;
   previousClose?: Maybe<Scalars['Float']>;
-  change?: Maybe<Scalars['Float']>;
-  changePercent?: Maybe<Scalars['String']>;
+  change: Scalars['Float'];
+  changePercent: Scalars['String'];
 };
 
 export type Query = {
