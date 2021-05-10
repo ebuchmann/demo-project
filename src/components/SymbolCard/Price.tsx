@@ -21,9 +21,10 @@ const IconContainer = styled.div`
 
 export const percentToFixed = (changePercent: string): string => {
   const number = Number(changePercent?.slice(0, changePercent.length - 1));
+  const prefixPlus = number >= 0 ? '+' : '';
 
   if (!number) return 'No change';
-  return `${number.toFixed(2)}%`;
+  return `${prefixPlus + number.toFixed(2)}%`;
 };
 
 interface PriceProps {

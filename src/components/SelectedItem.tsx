@@ -28,13 +28,13 @@ const LoadingWrapper = styled.div`
   flex-direction: column;
 `;
 
-interface Props {
+interface SelectedItemProps {
   symbol: string;
   name: string;
   currency: string;
 }
 
-const SelectedItem: FC<Props> = ({ symbol, name, currency }) => {
+const SelectedItem: FC<SelectedItemProps> = ({ symbol, name, currency }) => {
   const { data, loading, error, refetch } = useGlobalQuoteQuery({
     variables: { symbol },
     notifyOnNetworkStatusChange: true,

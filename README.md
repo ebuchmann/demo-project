@@ -3,10 +3,8 @@
 
 # Demo Project
 
-- Finish typings on server
-- Write some tests
 - Finish readme
-- Add displayName to all components
+- Make styles more consistent
 
 This is a demo project that shows GraphQL, React, Jest, Travis CI, and a few other things.
 

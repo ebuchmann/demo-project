@@ -8,15 +8,16 @@ describe(Price, () => {
     );
 
     expect(getByTestId('arrow-up')).toBeTruthy();
-    expect(getByTestId('change').innerHTML).toEqual('7.23%');
+    expect(getByTestId('change').innerHTML).toEqual('+7.23%');
   });
 
   it('should render negative values', () => {
     const { getByTestId } = render(
-      <Price currency="USD" change={-45} changePercent="7.2304%" price={300} />,
+      <Price currency="USD" change={-45} changePercent="-7.2304%" price={300} />,
     );
 
     expect(getByTestId('arrow-down')).toBeTruthy();
+    expect(getByTestId('change').innerHTML).toEqual('-7.23%');
   });
 });
 
@@ -24,7 +25,7 @@ describe(percentToFixed, () => {
   it('should format a percentage', () => {
     const value = percentToFixed('7.2304%');
 
-    expect(value).toEqual('7.23%');
+    expect(value).toEqual('+7.23%');
   });
 
   it('should return "no change" if an incorrect value was entered', () => {

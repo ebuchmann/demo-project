@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { useStore, shallow } from '../store';
 import { Doughnut } from 'react-chartjs-2';
+import { useStore, shallow } from '../store';
 
 const backgroundColor = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'];
 
