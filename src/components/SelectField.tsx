@@ -77,6 +77,7 @@ const SelectField: FC = () => {
       renderInput={(params) => (
         <TextField
           {...params}
+          data-testid="select-field"
           value={value}
           onChange={(event) => setValue(event.target.value)}
           placeholder="Search for symbol or name..."

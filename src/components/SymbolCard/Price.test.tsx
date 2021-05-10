@@ -1,4 +1,3 @@
-import React from 'react';
 import Price, { percentToFixed } from './Price';
 import { render } from '@testing-library/react';
 

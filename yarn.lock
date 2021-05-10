@@ -1520,6 +1520,15 @@
     lodash "~4.17.20"
     tslib "~2.2.0"
 
+"@graphql-codegen/schema-ast@^1.18.2":
+  version "1.18.2"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/schema-ast/-/schema-ast-1.18.2.tgz#e900b201cb8a56a4e7cf50a681935fb5166f4c05"
+  integrity sha512-ZzZa9b+/gU67goNnNi3b7iyZ1gmvsHo2w1s9YlRz+k8baVXSncAI6qT07z77VhS2i0TQUjC5ivfxPyVttY5YTw==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^1.18.5"
+    "@graphql-tools/utils" "^7.0.0"
+    tslib "~2.2.0"
+
 "@graphql-codegen/typescript-operations@1.17.16":
   version "1.17.16"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-1.17.16.tgz#75eb389f268b2dbd2e46b235bcb957be561c31cb"
@@ -1709,6 +1718,17 @@
     "@graphql-tools/utils" "^7.7.0"
     tslib "~2.2.0"
 
+"@graphql-tools/mock@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/mock/-/mock-8.1.2.tgz#c227144260c7ee3410dd47fba1d73d1ee0b75950"
+  integrity sha512-tgvy/NYZzd9D/UHMkmTE+XWHCYL01pDaNKBtKb37Pr1UOlPXtLhSQtqRPvvXIg+VUW5yK4pRlC9Xcxm0ZAKXhA==
+  dependencies:
+    "@graphql-tools/schema" "^7.0.0"
+    "@graphql-tools/utils" "^7.0.0"
+    fast-json-stable-stringify "^2.1.0"
+    ts-is-defined "^1.0.0"
+    tslib "~2.2.0"
+
 "@graphql-tools/optimize@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@graphql-tools/optimize/-/optimize-1.0.1.tgz#9933fffc5a3c63f95102b1cb6076fb16ac7bb22d"
@@ -1799,6 +1819,15 @@
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.9.0.tgz#e0419657c76f249a6fea9c4c1ea3091fe08be6b1"
   integrity sha512-WaYfdKmYFw7Rw5BmFehwo5zqoHNlO1soKVSdrh4qN0X1U34g4aqESAMYogtlp2yWDb2b3qKShiByCvRWNypbVA==
+  dependencies:
+    "@ardatan/aggregate-error" "0.0.6"
+    camel-case "4.1.2"
+    tslib "~2.2.0"
+
+"@graphql-tools/utils@^7.9.1":
+  version "7.9.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-7.9.1.tgz#265e12a0b8a396be97f459599f2f1150fceee4b1"
+  integrity sha512-k4bQWsOnSJSW7suBnVUJf3Sc8uXuvIYLHXujbEoSrwOEHjC+707GvXbQ7rg+8l7v8NMgpyARyuKFlqz3cfoxBQ==
   dependencies:
     "@ardatan/aggregate-error" "0.0.6"
     camel-case "4.1.2"
@@ -8672,6 +8701,11 @@ jest-snapshot@^26.6.0, jest-snapshot@^26.6.2:
     pretty-format "^26.6.2"
     semver "^7.3.2"
 
+jest-transform-graphql@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/jest-transform-graphql/-/jest-transform-graphql-2.1.0.tgz#903cb66bb27bc2772fd3e5dd4f7e9b57230f5829"
+  integrity sha1-kDy2a7J7wncv0+XdT36bVyMPWCk=
+
 jest-util@^26.1.0, jest-util@^26.6.0, jest-util@^26.6.2:
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-26.6.2.tgz#907535dbe4d5a6cb4c47ac9b926f6af29576cbc1"
@@ -13577,6 +13611,13 @@ ts-invariant@^0.7.0:
   dependencies:
     tslib "^2.1.0"
 
+ts-is-defined@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ts-is-defined/-/ts-is-defined-1.0.0.tgz#8f106af8c43ba6200beaac0a8013dc3745451ae7"
+  integrity sha512-HmzqN8xWETXnfpXyUqMf5nvcZszn9aTNjxVIJ6R2aNNg14oLo3PCi9IRhsv+vg2C7TI90M7PyjBOrg4f6/nupA==
+  dependencies:
+    ts-tiny-invariant "0.0.3"
+
 ts-jest@^26.5.6:
   version "26.5.6"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-26.5.6.tgz#c32e0746425274e1dfe333f43cd3c800e014ec35"
@@ -13631,6 +13672,11 @@ ts-pnp@1.2.0, ts-pnp@^1.1.6:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
+
+ts-tiny-invariant@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/ts-tiny-invariant/-/ts-tiny-invariant-0.0.3.tgz#6f51c153c285a7839bb59b1e5a2721fcb25a5e39"
+  integrity sha512-EiaBUsUta7PPzVKpvZurcSDgaSkymxwiUc2rhX6Wu30bws2maipT6ihbEY072dU9lz6/FoFWEc6psXdlo0xqtg==
 
 tsconfig-paths@^3.9.0:
   version "3.9.0"

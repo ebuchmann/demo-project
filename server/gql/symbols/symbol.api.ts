@@ -17,17 +17,11 @@ const limiter = new Bottleneck({
 });
 
 interface SymbolResponseData {
-  bestMatches: {
-    '1. symbol': string;
-    '2. name': string;
-    '3. type': string;
-    '4. region': string;
-    '5. marketOpen': string;
-    '6. marketClose': string;
-    '7. timezone': string;
-    '8. currency': string;
-    '9. matchScore': string;
-  }[];
+  bestMatches: Record<string, string>[];
+}
+
+interface GlobalQuoteResponseData {
+  'Global Quote': Record<string, string>;
 }
 
 export class SymbolAPI extends RESTDataSource {
@@ -38,7 +32,7 @@ export class SymbolAPI extends RESTDataSource {
 
   async getById(symbol: string): Promise<SymbolDetail> {
     const data = await limiter.schedule(() =>
-      this.get(`?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`),
+      this.get<Record<string, string>>(`?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`),
     );
 
     const cleanedData = renameKeys(data, symbolDetailKeys);
@@ -61,7 +55,7 @@ export class SymbolAPI extends RESTDataSource {
 
   async getGlobalQuote(symbol: string): Promise<GlobalQuote> {
     const data = await limiter.schedule(() =>
-      this.get<SymbolResponseData>(`?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`),
+      this.get<GlobalQuoteResponseData>(`?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`),
     );
 
     const cleanedData = renameKeys(data['Global Quote'], globalQuoteKeys);

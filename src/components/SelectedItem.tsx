@@ -76,7 +76,7 @@ const SelectedItem: FC<Props> = ({ symbol, name, currency }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper data-testid={`item-${symbol}`}>
       <div>
         <Typography variant="h5">{name}</Typography>
         <Typography variant="body2">{symbol}</Typography>

@@ -7,7 +7,7 @@ const doughnut = jest.fn();
 jest.mock('react-chartjs-2', () => ({
   Doughnut: (props) => {
     doughnut(props);
-    return <div>hi</div>;
+    return <div>kittens</div>;
   },
 }));
 

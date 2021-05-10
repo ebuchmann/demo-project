@@ -19,3 +19,8 @@ generates:
       withHooks: true
       withHOC: false
       withComponent: false
+  __tests__/typeDefs.graphql:
+    plugins:
+      - schema-ast
+    config:
+      includeDirectives: true

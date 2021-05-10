@@ -1,4 +1,3 @@
-import React from 'react';
 import Currency from './Currency';
 import { render } from '@testing-library/react';
 

@@ -28,6 +28,8 @@ To get started do the following after cloning the project:
 
 ### Graphql Codegen
 
+The ability to generate Typescript types based on GQL schemas is amazing. This tool also provides more than just type definitions to use on the server, it can also generate client side code for your queries and mutations that come fully typed. Getting all the types for a `useQuery` hook can be a pain, but this makes it simple. Another benefit is generating the typeDefs based on the schema for use in tests where we want to automatically mock certain data based on it's type.
+
 ### React
 
 ### Apollo Client
