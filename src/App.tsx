@@ -9,6 +9,7 @@ const OuterContainer = styled.div`
   height: 100%;
   background-color: #efefef;
   overflow: scroll;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 `;
 
 const Container = styled.div`

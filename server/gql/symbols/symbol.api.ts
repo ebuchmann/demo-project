@@ -5,7 +5,7 @@ import {
   SymbolInfo,
   QuerySearchSymbolsArgs,
   GlobalQuote,
-} from '../../../types/generated';
+} from '../../types/generated';
 import { renameKeys, globalQuoteKeys, symbolKeys, symbolDetailKeys } from './utils';
 import config from 'config';
 

@@ -1,4 +1,4 @@
-import { DataSources } from '../server/gql';
+import { DataSources } from '../gql';
 
 export type GraphQLContext = {
   dataSources: DataSources;

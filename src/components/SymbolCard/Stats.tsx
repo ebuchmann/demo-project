@@ -36,7 +36,7 @@ const Stats: FC<StatsProps> = ({ currency, high, low, missingEps }) => {
       <Typography variant="h6" style={{ marginBottom: '16px' }}>
         Stats
       </Typography>
-      <StatContainer>
+      <StatContainer style={{ marginBottom: '4px' }}>
         <Label>High:</Label>
         <Value>
           <Currency currency={currency} value={high} />

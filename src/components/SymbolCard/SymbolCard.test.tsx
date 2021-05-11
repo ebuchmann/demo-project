@@ -1,10 +1,10 @@
-import SelectedItem from './SelectedItem';
-import { renderWithProviders, actWait } from '../../__tests__/utils';
+import SymbolCard from './SymbolCard';
+import { renderWithProviders, actWait } from '../../../test-utils/utils';
 
-describe(SelectedItem, () => {
+describe(SymbolCard, () => {
   it('renders a loading state', async () => {
     const { baseElement } = renderWithProviders(
-      <SelectedItem symbol="CAT" name="Cat Company" currency="USD" />,
+      <SymbolCard symbol="CAT" name="Cat Company" currency="USD" />,
     );
     const progress = baseElement.querySelector('.MuiCircularProgress-root');
     expect(progress).toBeTruthy();
@@ -13,7 +13,7 @@ describe(SelectedItem, () => {
 
   it('renders information after getting data', async () => {
     const { getByText } = renderWithProviders(
-      <SelectedItem symbol="CAT" name="Cat Company" currency="USD" />,
+      <SymbolCard symbol="CAT" name="Cat Company" currency="USD" />,
     );
 
     await actWait(0);

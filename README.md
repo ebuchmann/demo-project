@@ -3,7 +3,7 @@
 
 # Demo Project
 
-This is a demo project that shows GraphQL, React, Jest, Travis CI, and a few other things.
+This is a demo project that shows Typescript, GraphQL, React, Jest, Travis CI, and a few other things.
 
 ## Running this project
 

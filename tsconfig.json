@@ -17,5 +17,5 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
-  "files": ["./types/graphql.d.ts"]
+  "files": ["./graphql.d.ts"]
 }

@@ -1,5 +1,5 @@
 import App from './App';
-import { renderWithProviders, fireEvent, actWait } from '../__tests__/utils';
+import { renderWithProviders, fireEvent, actWait } from '../test-utils/utils';
 
 const doughnut = jest.fn();
 

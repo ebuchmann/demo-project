@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useStore, shallow } from '../store';
 import styled from '@emotion/styled';
-import SelectedItem from './SelectedItem';
+import SymbolCard from './SymbolCard';
 
 const Grid = styled.div`
   display: grid;
@@ -9,6 +9,11 @@ const Grid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 16px;
   margin-bottom: 32px;
+
+  @media (max-width: 650px) {
+    grid-auto-flow: row;
+    grid-template-columns: auto;
+  }
 `;
 
 const SelectedItems: FC = () => {
@@ -17,7 +22,7 @@ const SelectedItems: FC = () => {
   return (
     <Grid>
       {selections.map((data) => (
-        <SelectedItem key={data.symbol} {...data} />
+        <SymbolCard key={data.symbol} {...data} />
       ))}
     </Grid>
   );

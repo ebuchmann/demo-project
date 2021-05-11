@@ -2,17 +2,17 @@ import React, { FC, useEffect, useLayoutEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
-import { useGlobalQuoteQuery } from '../gql/generated';
+import { useGlobalQuoteQuery } from '../../gql/generated';
 import styled from '@emotion/styled';
-import { useStore, shallow } from '../store';
-import Price from './SymbolCard/Price';
-import Stats from './SymbolCard/Stats';
+import { useStore, shallow } from '../../store';
+import Price from './Price';
+import Stats from './Stats';
 
 const BaseWrapper = styled.div`
   padding: 24px;
   background-color: white;
   border-radius: 4px;
-  border: 1px solid grey;
+  border: 1px solid #c4c4c4;
 `;
 
 const Wrapper = styled(BaseWrapper)`
@@ -27,13 +27,13 @@ const LoadingWrapper = styled(BaseWrapper)`
   flex-direction: column;
 `;
 
-interface SelectedItemProps {
+interface SymbolCardProps {
   symbol: string;
   name: string;
   currency: string;
 }
 
-const SelectedItem: FC<SelectedItemProps> = ({ symbol, name, currency }) => {
+const SymbolCard: FC<SymbolCardProps> = ({ symbol, name, currency }) => {
   const { data, loading, error, refetch } = useGlobalQuoteQuery({
     variables: { symbol },
     notifyOnNetworkStatusChange: true,
@@ -86,5 +86,5 @@ const SelectedItem: FC<SelectedItemProps> = ({ symbol, name, currency }) => {
   );
 };
 
-SelectedItem.displayName = 'SelectedItem';
-export default SelectedItem;
+SymbolCard.displayName = 'SymbolCard';
+export default SymbolCard;

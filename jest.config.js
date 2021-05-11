@@ -16,8 +16,8 @@ module.exports = {
     'jest.config.js',
     '/config',
     'generated.ts',
-    '__tests__',
+    '/test-utils',
     '.eslintrc.js',
   ],
-  testPathIgnorePatterns: ['/config', '__tests__'],
+  testPathIgnorePatterns: ['/config', '/test-utils'],
 };
