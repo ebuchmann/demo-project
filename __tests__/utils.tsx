@@ -1,7 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { act, render, RenderOptions, RenderResult } from '@testing-library/react';
 import ApolloMockedProvider from './ApolloMockedProvider';
-// @ts-ignore
 import typeDefs from './typeDefs.graphql';
 import mocks from './apolloMocks';
 

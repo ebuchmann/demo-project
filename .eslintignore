@@ -1,1 +1,5 @@
 generated.ts
+node_modules
+coverage
+/config
+.eslintrc.js

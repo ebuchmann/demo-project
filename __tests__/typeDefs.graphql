@@ -24,20 +24,8 @@ type GlobalQuote {
 
 type Query {
   symbol(symbol: ID!): SymbolDetail
-  searchSymbols(keywords: String!): [Symbol]
+  searchSymbols(keywords: String!): [SymbolInfo]
   globalQuote(symbol: ID!): GlobalQuote
-}
-
-type Symbol {
-  symbol: ID!
-  name: String!
-  type: String
-  region: String
-  marketOpen: String
-  marketClose: String
-  timezone: String
-  currency: String!
-  matchScore: String
 }
 
 type SymbolDetail {
@@ -101,6 +89,18 @@ type SymbolDetail {
   exDividendDate: String
   lastSplitFactor: String
   lastSplitDate: String
+}
+
+type SymbolInfo {
+  symbol: ID!
+  name: String!
+  type: String
+  region: String
+  marketOpen: String
+  marketClose: String
+  timezone: String
+  currency: String!
+  matchScore: String
 }
 
 """The `Upload` scalar type represents a file upload."""

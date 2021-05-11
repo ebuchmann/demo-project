@@ -2,7 +2,7 @@ import { RESTDataSource } from 'apollo-datasource-rest';
 import Bottleneck from 'bottleneck';
 import {
   SymbolDetail,
-  Symbol,
+  SymbolInfo,
   QuerySearchSymbolsArgs,
   GlobalQuote,
 } from '../../../types/generated';
@@ -35,18 +35,18 @@ export class SymbolAPI extends RESTDataSource {
       this.get<Record<string, string>>(`?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`),
     );
 
-    const cleanedData = renameKeys(data, symbolDetailKeys);
+    const cleanedData = renameKeys<SymbolDetail>(data, symbolDetailKeys);
 
     return cleanedData;
   }
 
-  async getAll({ keywords }: QuerySearchSymbolsArgs): Promise<Symbol[]> {
+  async getAll({ keywords }: QuerySearchSymbolsArgs): Promise<SymbolInfo[]> {
     const data = await limiter.schedule(() =>
       this.get<SymbolResponseData>(`?function=SYMBOL_SEARCH&keywords=${keywords}&apikey=${apiKey}`),
     );
 
     const cleanedData = data.bestMatches.reduce((prev, curr) => {
-      const newData = renameKeys(curr, symbolKeys);
+      const newData = renameKeys<SymbolInfo>(curr, symbolKeys);
       return [...prev, newData];
     }, []);
 
@@ -58,7 +58,7 @@ export class SymbolAPI extends RESTDataSource {
       this.get<GlobalQuoteResponseData>(`?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`),
     );
 
-    const cleanedData = renameKeys(data['Global Quote'], globalQuoteKeys);
+    const cleanedData = renameKeys<GlobalQuote>(data['Global Quote'], globalQuoteKeys);
 
     return cleanedData;
   }

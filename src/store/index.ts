@@ -1,10 +1,10 @@
 import create from 'zustand';
 import shallow from 'zustand/shallow';
-import { Symbol } from '../gql/generated';
+import { SymbolInfo } from '../gql/generated';
 
 export { shallow };
 
-export type Selections = Pick<Symbol, 'symbol' | 'name' | 'currency'>;
+export type Selections = Pick<SymbolInfo, 'symbol' | 'name' | 'currency'>;
 
 interface State {
   selections: Selections[];

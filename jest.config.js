@@ -17,6 +17,7 @@ module.exports = {
     '/config',
     'generated.ts',
     '__tests__',
+    '.eslintrc.js',
   ],
   testPathIgnorePatterns: ['/config', '__tests__'],
 };

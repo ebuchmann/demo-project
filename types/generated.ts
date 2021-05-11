@@ -39,7 +39,7 @@ export type GlobalQuote = {
 export type Query = {
   __typename?: 'Query';
   symbol?: Maybe<SymbolDetail>;
-  searchSymbols?: Maybe<Array<Maybe<Symbol>>>;
+  searchSymbols?: Maybe<Array<Maybe<SymbolInfo>>>;
   globalQuote?: Maybe<GlobalQuote>;
 };
 
@@ -56,19 +56,6 @@ export type QuerySearchSymbolsArgs = {
 
 export type QueryGlobalQuoteArgs = {
   symbol: Scalars['ID'];
-};
-
-export type Symbol = {
-  __typename?: 'Symbol';
-  symbol: Scalars['ID'];
-  name: Scalars['String'];
-  type?: Maybe<Scalars['String']>;
-  region?: Maybe<Scalars['String']>;
-  marketOpen?: Maybe<Scalars['String']>;
-  marketClose?: Maybe<Scalars['String']>;
-  timezone?: Maybe<Scalars['String']>;
-  currency: Scalars['String'];
-  matchScore?: Maybe<Scalars['String']>;
 };
 
 export type SymbolDetail = {
@@ -135,6 +122,19 @@ export type SymbolDetail = {
   lastSplitDate?: Maybe<Scalars['String']>;
 };
 
+export type SymbolInfo = {
+  __typename?: 'SymbolInfo';
+  symbol: Scalars['ID'];
+  name: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  marketOpen?: Maybe<Scalars['String']>;
+  marketClose?: Maybe<Scalars['String']>;
+  timezone?: Maybe<Scalars['String']>;
+  currency: Scalars['String'];
+  matchScore?: Maybe<Scalars['String']>;
+};
+
 
 export type SearchSymbolsQueryVariables = Exact<{
   keywords: Scalars['String'];
@@ -144,8 +144,8 @@ export type SearchSymbolsQueryVariables = Exact<{
 export type SearchSymbolsQuery = (
   { __typename?: 'Query' }
   & { searchSymbols?: Maybe<Array<Maybe<(
-    { __typename?: 'Symbol' }
-    & Pick<Symbol, 'symbol' | 'name' | 'currency'>
+    { __typename?: 'SymbolInfo' }
+    & Pick<SymbolInfo, 'symbol' | 'name' | 'currency'>
   )>>> }
 );
 
@@ -250,8 +250,8 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Query: ResolverTypeWrapper<{}>;
-  Symbol: ResolverTypeWrapper<Symbol>;
   SymbolDetail: ResolverTypeWrapper<SymbolDetail>;
+  SymbolInfo: ResolverTypeWrapper<SymbolInfo>;
   Upload: ResolverTypeWrapper<Scalars['Upload']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
@@ -264,8 +264,8 @@ export type ResolversParentTypes = {
   Int: Scalars['Int'];
   String: Scalars['String'];
   Query: {};
-  Symbol: Symbol;
   SymbolDetail: SymbolDetail;
+  SymbolInfo: SymbolInfo;
   Upload: Scalars['Upload'];
   Boolean: Scalars['Boolean'];
 };
@@ -291,21 +291,8 @@ export type GlobalQuoteResolvers<ContextType = GraphQLContext, ParentType extend
 
 export type QueryResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   symbol?: Resolver<Maybe<ResolversTypes['SymbolDetail']>, ParentType, ContextType, RequireFields<QuerySymbolArgs, 'symbol'>>;
-  searchSymbols?: Resolver<Maybe<Array<Maybe<ResolversTypes['Symbol']>>>, ParentType, ContextType, RequireFields<QuerySearchSymbolsArgs, 'keywords'>>;
+  searchSymbols?: Resolver<Maybe<Array<Maybe<ResolversTypes['SymbolInfo']>>>, ParentType, ContextType, RequireFields<QuerySearchSymbolsArgs, 'keywords'>>;
   globalQuote?: Resolver<Maybe<ResolversTypes['GlobalQuote']>, ParentType, ContextType, RequireFields<QueryGlobalQuoteArgs, 'symbol'>>;
-};
-
-export type SymbolResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Symbol'] = ResolversParentTypes['Symbol']> = {
-  symbol?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  region?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  marketOpen?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  marketClose?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  timezone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  currency?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  matchScore?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type SymbolDetailResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['SymbolDetail'] = ResolversParentTypes['SymbolDetail']> = {
@@ -372,6 +359,19 @@ export type SymbolDetailResolvers<ContextType = GraphQLContext, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type SymbolInfoResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['SymbolInfo'] = ResolversParentTypes['SymbolInfo']> = {
+  symbol?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  region?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  marketOpen?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  marketClose?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  timezone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  currency?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  matchScore?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
   name: 'Upload';
 }
@@ -379,8 +379,8 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 export type Resolvers<ContextType = GraphQLContext> = {
   GlobalQuote?: GlobalQuoteResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  Symbol?: SymbolResolvers<ContextType>;
   SymbolDetail?: SymbolDetailResolvers<ContextType>;
+  SymbolInfo?: SymbolInfoResolvers<ContextType>;
   Upload?: GraphQLScalarType;
 };
 

@@ -40,7 +40,7 @@ const SelectField: FC = () => {
     }
   }, [handleSearch, debouncedValue]);
 
-  const onChange = (_event: ChangeEvent<{}>, newValues: Selections[]) => {
+  const onChange = (_event: ChangeEvent<unknown>, newValues: Selections[]) => {
     if (newValues.length <= 3) setSelections(newValues);
   };
 

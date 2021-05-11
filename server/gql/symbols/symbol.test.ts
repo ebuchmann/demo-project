@@ -6,7 +6,7 @@ import SymbolAPI from './symbol.api';
 
 import { dataSources, typeDefs, resolvers } from '../';
 
-const scope = nock('https://www.alphavantage.co/query')
+nock('https://www.alphavantage.co/query')
   .get(/\?function=SYMBOL_SEARCH&keywords=CAT.*/)
   .reply(200, {
     bestMatches: [
@@ -89,12 +89,6 @@ export const GlobalQuote = gql`
     }
   }
 `;
-
-const mockStore = {
-  symbols: {
-    getAll: jest.fn(),
-  },
-};
 
 describe('Symbol Queries', () => {
   it('searches by keyword', async () => {

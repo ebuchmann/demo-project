@@ -86,11 +86,11 @@ export const symbolDetailKeys: Record<string, string> = {
   LastSplitDate: 'lastSplitDate',
 };
 
-export const renameKeys = (
+export const renameKeys = <T extends object>( // eslint-disable-line @typescript-eslint/ban-types
   data: Record<string, string>,
   keyMap: Record<string, string>,
-): Record<string, string> => {
-  const newData = {};
+): T => {
+  const newData = {} as T;
   Object.keys(data).forEach((key) => {
     newData[keyMap[key]] = data[key];
   });

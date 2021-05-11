@@ -8,23 +8,22 @@ import { useStore, shallow } from '../store';
 import Price from './SymbolCard/Price';
 import Stats from './SymbolCard/Stats';
 
-const Wrapper = styled.div`
+const BaseWrapper = styled.div`
   padding: 24px;
-  border: 1px solid grey;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1.5fr;
   background-color: white;
   border-radius: 4px;
+  border: 1px solid grey;
 `;
 
-const LoadingWrapper = styled.div`
-  border: 1px solid grey;
-  padding: 24px;
+const Wrapper = styled(BaseWrapper)`
+  display: grid;
+  grid-template-rows: 1fr 1fr 1.5fr;
+`;
+
+const LoadingWrapper = styled(BaseWrapper)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  border-radius: 4px;
   flex-direction: column;
 `;
 

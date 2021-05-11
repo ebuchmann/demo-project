@@ -1,11 +1,12 @@
 // https://www.graphql-tools.com/docs/mocking#customizing-mocks
+import { IMocks } from '@graphql-tools/mock';
 
-const mocks = {
+const mocks: IMocks = {
   GlobalQuote: () => ({
     symbol: 'CAT',
     price: 350,
   }),
-  Symbol: () => ({
+  SymbolInfo: () => ({
     symbol: 'CAT',
     name: 'Cat Company',
     currency: 'USD',

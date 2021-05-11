@@ -4,7 +4,6 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import styled from '@emotion/styled';
 import Currency from './Currency';
-import { Symbol, GlobalQuote } from '../../gql/generated';
 
 const PriceContainer = styled.div`
   display: flex;

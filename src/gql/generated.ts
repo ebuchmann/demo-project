@@ -39,7 +39,7 @@ export type GlobalQuote = {
 export type Query = {
   __typename?: 'Query';
   symbol?: Maybe<SymbolDetail>;
-  searchSymbols?: Maybe<Array<Maybe<Symbol>>>;
+  searchSymbols?: Maybe<Array<Maybe<SymbolInfo>>>;
   globalQuote?: Maybe<GlobalQuote>;
 };
 
@@ -56,19 +56,6 @@ export type QuerySearchSymbolsArgs = {
 
 export type QueryGlobalQuoteArgs = {
   symbol: Scalars['ID'];
-};
-
-export type Symbol = {
-  __typename?: 'Symbol';
-  symbol: Scalars['ID'];
-  name: Scalars['String'];
-  type?: Maybe<Scalars['String']>;
-  region?: Maybe<Scalars['String']>;
-  marketOpen?: Maybe<Scalars['String']>;
-  marketClose?: Maybe<Scalars['String']>;
-  timezone?: Maybe<Scalars['String']>;
-  currency: Scalars['String'];
-  matchScore?: Maybe<Scalars['String']>;
 };
 
 export type SymbolDetail = {
@@ -135,6 +122,19 @@ export type SymbolDetail = {
   lastSplitDate?: Maybe<Scalars['String']>;
 };
 
+export type SymbolInfo = {
+  __typename?: 'SymbolInfo';
+  symbol: Scalars['ID'];
+  name: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  marketOpen?: Maybe<Scalars['String']>;
+  marketClose?: Maybe<Scalars['String']>;
+  timezone?: Maybe<Scalars['String']>;
+  currency: Scalars['String'];
+  matchScore?: Maybe<Scalars['String']>;
+};
+
 
 export type SearchSymbolsQueryVariables = Exact<{
   keywords: Scalars['String'];
@@ -144,8 +144,8 @@ export type SearchSymbolsQueryVariables = Exact<{
 export type SearchSymbolsQuery = (
   { __typename?: 'Query' }
   & { searchSymbols?: Maybe<Array<Maybe<(
-    { __typename?: 'Symbol' }
-    & Pick<Symbol, 'symbol' | 'name' | 'currency'>
+    { __typename?: 'SymbolInfo' }
+    & Pick<SymbolInfo, 'symbol' | 'name' | 'currency'>
   )>>> }
 );
 

@@ -6,11 +6,11 @@ import { gql } from 'apollo-server-express';
 export default gql`
   type Query {
     symbol(symbol: ID!): SymbolDetail
-    searchSymbols(keywords: String!): [Symbol]
+    searchSymbols(keywords: String!): [SymbolInfo]
     globalQuote(symbol: ID!): GlobalQuote
   }
 
-  type Symbol {
+  type SymbolInfo {
     symbol: ID!
     name: String!
     type: String
