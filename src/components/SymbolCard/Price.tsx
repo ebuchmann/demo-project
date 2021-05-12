@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import Typography from '@material-ui/core/Typography';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import DragHandleIcon from '@material-ui/icons/DragHandle';
 import styled from '@emotion/styled';
 import Currency from './Currency';
 
@@ -10,8 +11,15 @@ const PriceContainer = styled.div`
   align-items: center;
 `;
 
-const Change = styled.div<{ isPositive: boolean }>`
-  color: ${(props) => (props.isPositive ? 'green' : 'red')};
+const getColor = (change: number): string => {
+  if (change > 0) return 'green';
+  else if (change < 0) return 'red';
+
+  return 'black';
+};
+
+const Change = styled.div<{ change: number }>`
+  color: ${(props) => getColor(props.change)};
   font-size: 80%;
 `;
 
@@ -27,6 +35,27 @@ export const percentToFixed = (changePercent: string): string => {
   return `${prefixPlus + number.toFixed(2)}%`;
 };
 
+const getIcon = (change: number): JSX.Element => {
+  if (change > 0)
+    return (
+      <ArrowUpwardIcon
+        data-testid="arrow-up"
+        fontSize="large"
+        style={{ color: getColor(change) }}
+      />
+    );
+  if (change < 0)
+    return (
+      <ArrowDownwardIcon
+        data-testid="arrow-down"
+        fontSize="large"
+        style={{ color: getColor(change) }}
+      />
+    );
+
+  return <DragHandleIcon data-testid="equals" fontSize="large" />;
+};
+
 interface PriceProps {
   change: number;
   changePercent: string;
@@ -35,20 +64,12 @@ interface PriceProps {
 }
 
 const Price: FC<PriceProps> = ({ change, changePercent, currency, price }) => {
-  const isPositive = change >= 0;
-
   return (
     <PriceContainer>
-      <IconContainer>
-        {isPositive ? (
-          <ArrowUpwardIcon data-testid="arrow-up" fontSize="large" style={{ color: 'green' }} />
-        ) : (
-          <ArrowDownwardIcon data-testid="arrow-down" fontSize="large" style={{ color: 'red' }} />
-        )}
-      </IconContainer>
+      <IconContainer>{getIcon(change)}</IconContainer>
       <Typography variant="h6" component="div">
         <Currency currency={currency} value={price} />
-        <Change data-testid="change" isPositive={isPositive}>
+        <Change data-testid="change" change={change}>
           {percentToFixed(changePercent)}
         </Change>
       </Typography>

@@ -12,7 +12,7 @@ To get started do the following after cloning the project:
 1. Run `yarn install` - to install dependencies
 2. Get an API key at [Alphavantage.co](https://www.alphavantage.co/support/#api-key)
 3. Make a copy of `config/local.example.js` and rename it as `config/local.js`, this file isn't tracked in GIT to allow each developer to set config values to what they want
-4. Fill in the `apiKey` value in the `config/local.js` file with the key you generated, this file is not tracked in git
+4. Fill in the `apiKey` value in the `config/local.js` file with the key you generated
 5. Run `yarn start` - to start the client and GraphQL server
 6. Visit [http://localhost:3000/](http://localhost:3000/) to see the demo
 7. Visit [http://localhost:8080/graphql](http://localhost:8080/graphql) if you'd like to do something in the GraphQL playground

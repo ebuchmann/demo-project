@@ -19,6 +19,15 @@ describe(Price, () => {
     expect(getByTestId('arrow-down')).toBeTruthy();
     expect(getByTestId('change').innerHTML).toEqual('-7.23%');
   });
+
+  it('should render no change in value', () => {
+    const { getByTestId } = render(
+      <Price currency="USD" change={0} changePercent="0%" price={300} />,
+    );
+
+    expect(getByTestId('equals')).toBeTruthy();
+    expect(getByTestId('change').innerHTML).toEqual('No change');
+  });
 });
 
 describe(percentToFixed, () => {
